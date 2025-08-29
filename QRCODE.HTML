@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>UPI QR Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- QRCode.js (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; padding: 24px; }
+    .card { max-width: 520px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 16px; }
+    label { display: block; margin: 12px 0 6px; font-weight: 600; }
+    input { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 10px; font-size: 16px; }
+    button { margin-top: 14px; padding: 10px 14px; border: 0; background: #111827; color: #fff; border-radius: 10px; font-size: 16px; cursor: pointer; }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    #qrcode { display: grid; place-items: center; margin-top: 18px; padding: 16px; border: 1px dashed #e5e7eb; border-radius: 12px; min-height: 220px; }
+    .muted { color: #6b7280; font-size: 14px; }
+    .link { margin-top: 10px; display: inline-block; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>UPI QR Code Generator</h2>
+    <p class="muted">Receiver UPI ID: <strong>yshalsingh6@fam</strong></p>
+
+    <label for="amount">Amount (INR)</label>
+    <input id="amount" type="number" min="1" step="0.01" placeholder="e.g., 100" />
+
+    <label for="note">Note (optional)</label>
+    <input id="note" type="text" maxlength="60" placeholder="e.g., Order #1234" />
+
+    <button id="make">Generate QR</button>
+
+    <div id="qrcode" aria-live="polite"></div>
+
+    <div id="upiUriWrap" style="display:none; margin-top:12px;">
+      <div class="muted">UPI Deep Link:</div>
+      <div class="mono" id="upiUri" style="margin-top:6px;"></div>
+      <a id="payNow" class="link" href="#" rel="noopener">Open in UPI app</a>
+      <div class="muted" style="margin-top:6px;">Tip: Long-press to copy the link if needed.</div>
+    </div>
+  </div>
+
+  <script>
+    // Static receiver details
+    var upiId = "yshalsingh6@fam";
+    var payeeName = "Yshal Singh"; // shown in some apps; change if needed
+    var currency = "INR";
+
+    function sanitizeAmount(raw) {
+      if (raw === null || raw === undefined) { return null; }
+      var num = Number(raw);
+      if (isNaN(num) || num <= 0) { return null; }
+      // UPI usually expects up to 2 decimals
+      return num.toFixed(2);
+    }
+
+    function buildUpiUri(upi, name, amount, note) {
+      // UPI URI spec: upi://pay?pa=<vpa>&pn=<name>&am=<amount>&cu=INR&tn=<note>
+      var params = [];
+      params.push("pa=" + encodeURIComponent(upi));
+      if (name && name.trim().length > 0) {
+        params.push("pn=" + encodeURIComponent(name.trim()));
+      }
+      if (amount) {
+        params.push("am=" + encodeURIComponent(amount));
+      }
+      params.push("cu=" + encodeURIComponent(currency));
+      if (note && note.trim().length > 0) {
+        params.push("tn=" + encodeURIComponent(note.trim()));
+      }
+      return "upi://pay?" + params.join("&");
+    }
+
+    function clearQr() {
+      var wrap = document.getElementById("qrcode");
+      while (wrap.firstChild) { wrap.removeChild(wrap.firstChild); }
+    }
+
+    function generateQrFromText(text) {
+      clearQr();
+      // Size chosen to scan reliably on most phones
+      new QRCode(document.getElementById("qrcode"), {
+        text: text,
+        width: 220,
+        height: 220,
+        correctLevel: QRCode.CorrectLevel.M
+      });
+    }
+
+    document.getElementById("make").addEventListener("click", function () {
+      var amountInput = document.getElementById("amount").value;
+      var noteInput = document.getElementById("note").value;
+
+      var amt = sanitizeAmount(amountInput);
+      if (!amt) {
+        alert("Please enter a valid amount greater than 0 (e.g., 100 or 100.00).");
+        return;
+      }
+
+      var uri = buildUpiUri(upiId, payeeName, amt, noteInput);
+      generateQrFromText(uri);
+
+      var uriWrap = document.getElementById("upiUriWrap");
+      var uriNode = document.getElementById("upiUri");
+      var payNow = document.getElementById("payNow");
+
+      uriNode.textContent = uri;
+      payNow.href = uri;
+      uriWrap.style.display = "block";
+    });
+  </script>
+</body>
+</html>
