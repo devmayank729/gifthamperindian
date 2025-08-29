@@ -3,6 +3,28 @@
 <html lang="en">
 
 <head>
+    <script>
+  (function() {
+    try {
+      // 1) explicit user choice in localStorage (most important)
+      var stored = localStorage.getItem('theme');
+
+      // 2) if no stored value, use system preference
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      // Decide final mode
+      var useDark = stored === 'dark' || (!stored && prefersDark);
+
+      if (useDark) document.documentElement.classList.add('dark');
+      else document.documentElement.classList.remove('dark');
+
+      // Optional: expose currentTheme for debugging
+      document.documentElement.dataset.initialTheme = useDark ? 'dark' : 'light';
+    } catch (e) {
+      // safe-fail: do nothing if localStorage is blocked
+    }
+  })();
+</script>
 
     <meta charset="UTF-8" />
 
