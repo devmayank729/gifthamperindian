@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HAMPER GIFT INDIAN - Premium Gifting</title>
+    <title>YOUR BRAND NAME</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -120,7 +120,7 @@
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center space-x-4">
                         <img src="https://placehold.co/40x40/7c3aed/ffffff?text=HGI" alt="Logo" class="h-10 w-10 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/ffffff?text=Error';">
-                        <span class="text-xl font-bold text-gray-900 dark:text-white">HAMPER GIFT INDIAN</span>
+                        <span class="text-xl font-bold text-gray-900 dark:text-white">XCEEDJS</span>
                     </div>
                     <button id="theme-toggle" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
                         <svg id="theme-icon-light" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -181,7 +181,7 @@
                 </div>
 
                 <div class="text-center text-gray-600 dark:text-gray-400 pt-8 border-t border-gray-200 dark:border-gray-700">
-                    <p class="mb-4">&copy; 2024 HAMPER GIFT INDIAN. All Rights Reserved.</p>
+                    <p class="mb-4">&copy; 2024 XCEEDJS. All Rights Reserved.</p>
                     <div class="flex justify-center items-center space-x-6">
                         <a href="https://www.instagram.com/hampergift_indian/" target="_blank" rel="noopener noreferrer" class="hover:text-purple-500 transition-colors">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.343 4.65c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.622c-2.403 0-2.748.01-3.71.058-.948.045-1.503.2-1.81.345-.38.18-.62.39-.894.664-.275.275-.485.515-.664.895-.145.307-.299.862-.345 1.81-.048.962-.058 1.307-.058 3.71s.01 2.748.058 3.71c.045.948.2 1.503.345 1.81.18.38.39.62.664.894.275.275.515.485.895.664.307.145.862.299 1.81.345.962.048 1.307.058 3.71.058s2.748-.01 3.71-.058c.948-.045 1.503-.2 1.81-.345.38-.18.62.39.894-.664.275-.275.485.515.664-.895.145-.307.299-.862-.345-1.81.048-.962.058-1.307-.058-3.71s-.01-2.748-.058-3.71c-.045-.948-.2-1.503-.345-1.81a3.29 3.29 0 00-.664-.894 3.29 3.29 0 00-.895-.664c-.307-.145-.862-.299-1.81-.345-.962-.048-1.307-.058-3.71-.058zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.648a3.513 3.513 0 110-7.026 3.513 3.513 0 010 7.026zM17.636 7.11a1.22 1.22 0 100-2.44 1.22 1.22 0 000 2.44z" clip-rule="evenodd" /></svg>
@@ -248,7 +248,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- CONFIGURATION ---
-            const UPI_ID = 'yshalsingh6@fam';
+            const UPI_ID = 'mr.mayank@superyes';
 
 
             // --- THEME SWITCHER ---
@@ -509,8 +509,8 @@
             // --- TESTIMONIAL SLIDER ---
             const feedbackImage = document.getElementById('feedback-image');
             const feedbackImages = [
-                'feedback1.png', 'feedback2.png', 'feedback3.png', 
-                'feedback4.png', 'feedback5.png', 'feedback6.png'
+                'feedback1.jpg', 'feedback2.jpg', 'feedback3.jpg', 
+                'feedback4.jpg', 'feedback5.jpg', 'feedback6.jpg'
             ];
             let currentFeedbackIndex = 0;
 
@@ -519,7 +519,7 @@
                 setTimeout(() => {
                     currentFeedbackIndex = (currentFeedbackIndex + 1) % feedbackImages.length;
                     const imageName = feedbackImages[currentFeedbackIndex];
-                    feedbackImage.src = `https://placehold.co/280x580/ffffff/333333?text=${imageName.replace('.png','')}`;
+                    feedbackImage.src = `https://placehold.co/280x580/ffffff/333333?text=${imageName}`;
                     feedbackImage.style.opacity = '1';
                 }, 700);
             }
