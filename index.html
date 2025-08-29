@@ -1,14 +1,28 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <title>HAMPER GIFT INDIAN - Premium Gifting</title>
+
+    <!-- Configure Tailwind to use class-based dark mode BEFORE the CDN loads -->
+    <script>tailwind = window.tailwind || {}; tailwind.config = { darkMode: 'class' };</script>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.js"></script>
+
+
 
     <style>
         /* ---------- Base ---------- */
@@ -112,14 +126,19 @@
         /* Ensure modals animate nicely */
         .modal-panel { transform-origin:center; transition: transform .25s ease, opacity .25s ease; }
     </style>
+
 </head>
+
 <body class="antialiased">
+
 
     <div id="global-loader" class="fixed inset-0 bg-gray-900 bg-opacity-60 z-[100] flex items-center justify-center hidden">
         <div class="loader"></div>
     </div>
 
+
     <div id="app-container" class="min-h-screen">
+
 
         <header class="sticky top-0 z-40 backglass shadow-md">
             <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -129,7 +148,8 @@
                         <span id="brand-name" class="text-xl font-bold text-[#F357DD] dark:text-pink"></span>
 
                     </div>
-                    <button id="theme-toggle" aria-label="Toggle theme" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#6C2BD9]">
+                    <button id="theme-toggle" aria-label="Toggle theme" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#6C2BD9]" aria-pressed="false">
+                        <!-- Two icons: we control visibility via JS -->
                         <svg id="theme-icon-light" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
@@ -141,23 +161,28 @@
             </nav>
         </header>
 
+
         <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div id="hero-carousel" class="relative w-full h-56 sm:h-80 md:h-96 mb-6 shadow-2xl rounded-xl overflow-hidden">
                 <!-- slides are injected by JS -->
             </div>
             <div id="carousel-dots" class="flex justify-center space-x-2 mb-12"></div>
 
+
             <div class="text-center mb-12">
                 <h1 class="text-4xl md:text-5xl font-extrabold">Curated Gifts, Delivered with Love</h1>
                 <p class="mt-4 text-lg text-[#4B5563] dark:text-gray-400 max-w-2xl mx-auto">Find the perfect gift for every occasion, handcrafted and delivered across India.</p>
             </div>
 
+
             <div id="grid-loader" class="flex justify-center items-center h-64">
                  <div class="loader"></div>
             </div>
 
+
             <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
         </main>
+
 
         <footer class="bg-gray-100 dark:bg-gray-800 mt-16">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -170,35 +195,59 @@
                             <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-700 absolute -start-[17px] top-[178px] rounded-s-lg"></div>
                             <div class="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-700 absolute -end-[17px] top-[142px] rounded-e-lg"></div>
                             <div class="rounded-[2rem] overflow-hidden w-full h-full bg-white dark:bg-gray-900 flex flex-col p-2">
+
                                 <img id="feedback-image" class="w-full h-full object-cover rounded-2xl flex-grow" alt="Client Feedback" src="https://placehold.co/272x572/f3f4f6/333333?text=Loading...">
+
                                 <div class="flex-shrink-0 pt-2 text-center">
+
                                     <div class="flex justify-center items-center space-x-2">
+
                                         <button id="prev" class="px-3 py-1 text-sm font-semibold rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Prev</button>
+
                                         <button id="pause" class="px-4 py-1 text-sm font-semibold rounded-md bg-[#6C2BD9] text-white hover:bg-[#5821b0] transition-colors">Pause</button>
+
                                         <button id="next" class="px-3 py-1 text-sm font-semibold rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Next</button>
+
                                     </div>
+
                                 </div>
+
                             </div>
+
                         </div>
+
                     </div>
+
                 </div>
+
 
                 <div class="text-center text-[#4B5563] dark:text-gray-400 pt-8 border-t border-[#E5E7EB] dark:border-gray-700">
                     <p class="mb-4">&copy; 2024 <span id="footer-brand-name"></span>. All Rights Reserved.</p>
                     <div class="flex justify-center items-center space-x-6">
+
                         <a id="instagram-link" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-[#6C2BD9] transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.343 4.65c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.622c-2.403 0-2.748.01-3.71.058-.948.045-1.503.2-1.81.345-.38.18-.62.39-.894.664-.275.275-.485.515-.664.895-.145.307-.299.862-.345 1.81-.048.962-.058 1.307-.058 3.71s.01 2.748.058 3.71c.045.948.2 1.503.345 1.81.18.38.39.62.664.894.275.275.515.485.895.664.307.145.862.299 1.81.345.962.048 1.307.058 3.71.058s2.748-.01 3.71-.058c.948-.045 1.503-.2 1.81-.345.38-.18.62.39.894.664.275-.275.485.515.664-.895.145-.307.299-.862-.345-1.81.048-.962.058-1.307-.058-3.71s-.01-2.748-.058-3.71c-.045-.948-.2-1.503-.345-1.81a3.29 3.29 0 00-.664-.894 3.29 3.29 0 00-.895-.664c-.307-.145-.862-.299-1.81-.345-.962-.048-1.307-.058-3.71-.058zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.648a3.513 3.513 0 110-7.026 3.513 3.513 0 010 7.026zM17.636 7.11a1.22 1.22 0 100-2.44 1.22 1.22 0 000 2.44z" clip-rule="evenodd" /></svg>
+                            <!-- replaced SVG with image (30x30) -->
+                            <img id="instagram-img" src="insta.png" alt="Instagram" width="30" height="30" class="w-[30px] h-[30px] object-contain">
                         </a>
+
                         <a id="email-link" href="#" class="hover:text-[#6C2BD9] transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
+                            <!-- replaced SVG with image (30x30) -->
+                            <img id="email-img" src="email.png" alt="Email" width="30" height="30" class="w-[30px] h-[30px] object-contain">
                         </a>
+
                     </div>
+
                      <p class="text-sm mt-4">Made with ❤️ by <a href="https://xceedjs.com" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#6C2BD9] hover:text-[#16A34A] transition-colors">XCEEDJS</a></p>
+
                 </div>
+
             </div>
+
         </footer>
 
+
     </div>
+
 
     <div id="order-form-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 hidden">
         <div class="modal-panel bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8 w-full max-w-md transform transition-all duration-300 scale-95 opacity-0">
@@ -216,7 +265,9 @@
                     <button type="button" id="cancel-order" class="w-full bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-gray-200 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-all">Cancel</button>
                     <button type="submit" class="w-full bg-[#6C2BD9] text-white font-bold py-3 px-4 rounded-lg hover:bg-[#5821b0] transition-all shadow-lg shadow-purple-500/30">Proceed to Pay</button>
                 </div>
+
             </form>
+
         </div>
     </div>
     
@@ -230,18 +281,30 @@
         </div>
     </div>
 
+
     <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 hidden">
         <div class="confetti-container"></div>
+
         <div class="modal-panel bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md text-center transform transition-all duration-300 scale-95 opacity-0">
+
             <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 dark:bg-green-900 mb-4">
+
                 <svg class="h-10 w-10 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+
                 </svg>
+
             </div>
+
             <h2 class="text-2xl font-bold mb-2 text-[#1F2937] dark:text-white">Payment Confirmed!</h2>
+
             <p class="text-[#4B5563] dark:text-gray-400">Our team will contact you shortly. Thank you for your order!</p>
+
         </div>
+
     </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -268,14 +331,12 @@
                     { name: 'Elegant Maroon Hamper', description: 'A rich, color-themed hamper for him, complete with essentials and treats.', price: 2000, image: 'photo5.jpg' },
                     { name: 'Sweet Memories Box', description: 'A charming pink gift box perfect for birthdays, filled with delightful surprises.', price: 1300, image: 'photo6.jpg' },
                     { name: 'Anniversary Surprise Trunk', description: 'Celebrate your special day with this elegant black trunk, customized for you.', price: 2000, image: 'photo7.jpg' },
-                    
     { 
      name: 'Pastel Dream Vanity',
      description: 'A lovely vanity case in a soothing pastel shade, perfect for any celebration.',
       price: 2000, 
       image: 'photo8.jpg'
      },
-
     {
         name: 'The Gentleman\'s Grooming Kit',
         description: 'A curated kit with premium shaving cream, a classic razor, aftershave balm, and a beard brush.',
@@ -306,10 +367,7 @@
         price: 1900,
         image: 'photo13.jpg'
     }
-
-
-
-                ],
+],
                 feedbackImages: [
                     'feedback1.jpg', 'feedback2.jpg', 'feedback3.jpg',
                     'feedback4.jpg', 'feedback5.jpg', 'feedback6.jpg',
@@ -318,6 +376,7 @@
             // =================================================================================
             // --- END OF CONFIGURATION ---
             // =================================================================================
+
 
             // --- INITIALIZE PAGE CONTENT FROM CONFIG ---
             const initPageContent = () => {
@@ -333,8 +392,10 @@
                 logoEl.addEventListener('error', () => {
                     logoEl.src = `https://placehold.co/40x40/6C2BD9/FFFFFF?text=${encodeURIComponent(CONFIG.brandName.split(' ')[0]||'H')}`;
                 });
+
             };
             initPageContent();
+
 
             // --- THEME SWITCHER (ROBUST) ---
             const themeToggleBtn = document.getElementById('theme-toggle');
@@ -348,10 +409,12 @@
                     htmlEl.classList.add('dark');
                     themeIconDark.classList.remove('hidden');
                     themeIconLight.classList.add('hidden');
+                    themeToggleBtn.setAttribute('aria-pressed', 'true');
                 } else {
                     htmlEl.classList.remove('dark');
                     themeIconDark.classList.add('hidden');
                     themeIconLight.classList.remove('hidden');
+                    themeToggleBtn.setAttribute('aria-pressed', 'false');
                 }
             };
 
@@ -369,12 +432,14 @@
                 applyTheme(newTheme);
             });
 
+
             // --- HERO CAROUSEL (fixed, mobile-first, touch-friendly) ---
             const carouselContainer = document.getElementById('hero-carousel');
             const dotsContainer = document.getElementById('carousel-dots');
             const carouselImages = CONFIG.heroImages.slice(); // copy
             let currentSlide = 0;
             let slideInterval;
+
 
             function createSlides() {
                 carouselContainer.innerHTML = '';
@@ -444,10 +509,10 @@
                 startCarousel();
             }
 
+
             // --- PRODUCT RENDERING (unchanged behavior) ---
             const productGrid = document.getElementById('product-grid');
             const gridLoader = document.getElementById('grid-loader');
-
             const renderProducts = () => {
                 productGrid.innerHTML = '';
                 CONFIG.productData.forEach(product => {
@@ -478,6 +543,7 @@
                 renderProducts();
                 attachBuyNowListeners();
             }, 1500);
+
 
             // --- MODAL & FORM LOGIC (unchanged behavior except small improvements) ---
             const globalLoader = document.getElementById('global-loader');
@@ -608,6 +674,7 @@
                     feedbackImageEl.style.opacity = 1;
                 });
 
+
                 function nextImage() { showImage(currentFeedbackIndex + 1); }
                 function prevImage() { showImage(currentFeedbackIndex - 1); }
 
@@ -635,5 +702,7 @@
 
         });
     </script>
+
 </body>
+
 </html>
