@@ -1,134 +1,135 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>HAMPER GIFT INDIAN - Premium Gifting</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-    <!-- QR Code Generation Library -->
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.js"></script>
+
     <style>
-        /* Base styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            @apply bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300;
+        /* ---------- Base ---------- */
+        :root{
+            --muted: #4B5563;
+            --brand: #6C2BD9;
+            --brand-dark: #5821b0;
+            --bg: #F9FAFB;
+            --surface: #FFFFFF;
+            --glass: rgba(255,255,255,0.6);
         }
 
-        h1, h2, h3 {
-            font-family: 'Poppins', sans-serif;
+        html,body{
+            height:100%;
+            margin:0;
+            padding:0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--muted);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            transition: background-color .25s ease, color .25s ease;
         }
-        
-        /* Custom Loader Animation */
+
+        /* Dark mode overrides (we toggle `dark` class on <html>) */
+        html.dark{
+            --muted: #E5E7EB;
+            --bg: #0B1020;
+            --surface: #0F1724;
+            --glass: rgba(17,24,39,0.65);
+        }
+
+        h1,h2,h3,h4{
+            font-family: 'Poppins', sans-serif;
+            color: #1F2937;
+        }
+        html.dark h1,h2,h3,h4{ color:#FFFFFF; }
+
+        /* Loader */
         .loader {
-            border: 4px solid rgba(255, 255, 255, 0.2);
-            border-top: 4px solid #7c3aed; /* Purple */
+            border: 4px solid rgba(255,255,255,0.18);
+            border-top: 4px solid var(--brand);
             border-radius: 50%;
             width: 50px;
             height: 50px;
             animation: spin 1s linear infinite;
         }
-        
         .grid-loader .loader {
-             border: 4px solid rgba(0,0,0,0.1);
-             border-top: 4px solid #7c3aed;
+            border: 4px solid rgba(0,0,0,0.08);
+            border-top: 4px solid var(--brand);
         }
-        
-        html.dark .grid-loader .loader {
-            border: 4px solid rgba(255,255,255,0.1);
-            border-top: 4px solid #7c3aed;
-        }
+        @keyframes spin { 0%{transform:rotate(0)}100%{transform:rotate(360deg)} }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Confetti animation for success modal */
+        /* Confetti */
         .confetti-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 9999;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; pointer-events: none; z-index: 9999;
         }
-
         .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            opacity: 0.9;
+            position: absolute; width: 10px; height: 10px; opacity: .95;
             animation: confetti-fall 4s ease-out forwards;
+            border-radius: 2px;
         }
-
         @keyframes confetti-fall {
-            0% {
-                transform: translateY(-10vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(110vh) rotate(720deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(-10vh) rotate(0deg); opacity:1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity:0; }
         }
 
-        /* Hero Carousel Styles */
+        /* Hero Carousel */
+        #hero-carousel { position: relative; overflow: hidden; border-radius: 12px; }
         .carousel-item {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            background-size: cover;
-            background-position: center;
+            position: absolute; inset: 0; opacity: 0;
+            transition: opacity 1s ease-in-out, transform 1s ease;
+            background-size: cover; background-position: center;
+            will-change: opacity;
         }
-        .carousel-item.active {
-            opacity: 1;
-        }
+        .carousel-item.active { opacity: 1; transform: translateZ(0); }
+
         .carousel-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #9ca3af; /* gray-400 */
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            width: 10px; height: 10px; border-radius: 999px;
+            background-color: #9ca3af; cursor: pointer; transition: background-color .25s;
         }
-        .carousel-dot.active {
-            background-color: #7c3aed; /* purple-600 */
-        }
-        
-        /* Feedback Carousel Styles Integration */
+        .carousel-dot.active { background-color: var(--brand); box-shadow: 0 0 8px rgba(108,43,217,0.18); }
+
+        /* Feedback image */
         #feedback-image {
             transition: opacity 700ms ease;
-            background: #eee;
+            background-color: #E5E7EB;
+            display:block;
         }
+
+        /* Small classy tweaks */
+        header.backglass {
+            background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(255,255,255,0.55));
+            backdrop-filter: blur(6px);
+        }
+        html.dark header.backglass {
+            background: linear-gradient(180deg, rgba(8,10,14,0.65), rgba(8,10,14,0.55));
+        }
+
+        /* Ensure modals animate nicely */
+        .modal-panel { transform-origin:center; transition: transform .25s ease, opacity .25s ease; }
     </style>
 </head>
-
 <body class="antialiased">
 
-    <!-- Global Loader Overlay -->
     <div id="global-loader" class="fixed inset-0 bg-gray-900 bg-opacity-60 z-[100] flex items-center justify-center hidden">
         <div class="loader"></div>
     </div>
 
-    <!-- App Container -->
     <div id="app-container" class="min-h-screen">
 
-        <!-- Header -->
-        <header class="sticky top-0 z-40 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-md">
+        <header class="sticky top-0 z-40 backglass shadow-md">
             <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center space-x-4">
-                        <img id="brand-logo" src="logo.png" alt="Logo" class="h-10 w-10 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/40x40/cccccc/ffffff?text=Error';">
-                        <span id="brand-name" class="text-xl font-bold text-gray-900 dark:text-white"></span>
+                        <img id="brand-logo" alt="Logo" class="h-10 w-10 rounded-full object-cover" src="logo.png">
+                        <span id="brand-name" class="text-xl font-bold text-[#F357DD] dark:text-pink"></span>
+
                     </div>
-                    <button id="theme-toggle" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                    <button id="theme-toggle" aria-label="Toggle theme" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-[#6C2BD9]">
                         <svg id="theme-icon-light" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
@@ -140,40 +141,29 @@
             </nav>
         </header>
 
-        <!-- Main Content -->
         <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-             <!-- Hero Carousel -->
             <div id="hero-carousel" class="relative w-full h-56 sm:h-80 md:h-96 mb-6 shadow-2xl rounded-xl overflow-hidden">
-                <!-- Carousel items will be injected here by JS -->
+                <!-- slides are injected by JS -->
             </div>
-            <div id="carousel-dots" class="flex justify-center space-x-2 mb-12">
-                <!-- Dots will be injected here by JS -->
-            </div>
+            <div id="carousel-dots" class="flex justify-center space-x-2 mb-12"></div>
 
             <div class="text-center mb-12">
-                <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white">Curated Gifts, Delivered with Love</h1>
-                <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Find the perfect gift for every occasion, handcrafted and delivered across India.</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold">Curated Gifts, Delivered with Love</h1>
+                <p class="mt-4 text-lg text-[#4B5563] dark:text-gray-400 max-w-2xl mx-auto">Find the perfect gift for every occasion, handcrafted and delivered across India.</p>
             </div>
 
-            <!-- Products Grid Loader -->
             <div id="grid-loader" class="flex justify-center items-center h-64">
                  <div class="loader"></div>
             </div>
 
-            <!-- Products Grid -->
-            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                <!-- Product cards will be injected here by JavaScript -->
-            </div>
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
         </main>
 
-        <!-- Footer -->
         <footer class="bg-gray-100 dark:bg-gray-800 mt-16">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                 <!-- Client Testimonials Section -->
                 <div class="mb-12">
-                    <h3 class="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white">What Our Clients Say</h3>
+                    <h3 class="text-3xl font-bold text-center mb-8">What Our Clients Say</h3>
                     <div class="flex justify-center">
-                        <!-- Phone Frame -->
                         <div class="relative mx-auto border-gray-800 dark:border-gray-700 bg-gray-800 border-[14px] rounded-[2.5rem] h-[650px] w-[300px] shadow-2xl">
                             <div class="w-[148px] h-[18px] bg-gray-800 dark:bg-gray-700 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
                             <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-700 absolute -start-[17px] top-[124px] rounded-s-lg"></div>
@@ -183,9 +173,9 @@
                                 <img id="feedback-image" class="w-full h-full object-cover rounded-2xl flex-grow" alt="Client Feedback" src="https://placehold.co/272x572/f3f4f6/333333?text=Loading...">
                                 <div class="flex-shrink-0 pt-2 text-center">
                                     <div class="flex justify-center items-center space-x-2">
-                                         <button id="prev" class="px-3 py-1 text-sm font-semibold rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Prev</button>
-                                         <button id="pause" class="px-4 py-1 text-sm font-semibold rounded-md bg-purple-600 text-white hover:bg-purple-700 transition-colors">Pause</button>
-                                         <button id="next" class="px-3 py-1 text-sm font-semibold rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Next</button>
+                                        <button id="prev" class="px-3 py-1 text-sm font-semibold rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Prev</button>
+                                        <button id="pause" class="px-4 py-1 text-sm font-semibold rounded-md bg-[#6C2BD9] text-white hover:bg-[#5821b0] transition-colors">Pause</button>
+                                        <button id="next" class="px-3 py-1 text-sm font-semibold rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Next</button>
                                     </div>
                                 </div>
                             </div>
@@ -193,68 +183,63 @@
                     </div>
                 </div>
 
-                <div class="text-center text-gray-600 dark:text-gray-400 pt-8 border-t border-gray-200 dark:border-gray-700">
+                <div class="text-center text-[#4B5563] dark:text-gray-400 pt-8 border-t border-[#E5E7EB] dark:border-gray-700">
                     <p class="mb-4">&copy; 2024 <span id="footer-brand-name"></span>. All Rights Reserved.</p>
                     <div class="flex justify-center items-center space-x-6">
-                        <a id="instagram-link" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-purple-500 transition-colors">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.343 4.65c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.622c-2.403 0-2.748.01-3.71.058-.948.045-1.503.2-1.81.345-.38.18-.62.39-.894.664-.275.275-.485.515-.664.895-.145.307-.299.862-.345 1.81-.048.962-.058 1.307-.058 3.71s.01 2.748.058 3.71c.045.948.2 1.503.345 1.81.18.38.39.62.664.894.275.275.515.485.895.664.307.145.862.299 1.81.345.962.048 1.307.058 3.71.058s2.748-.01 3.71-.058c.948-.045 1.503-.2 1.81-.345.38-.18.62.39.894-.664.275-.275.485.515.664-.895.145-.307.299-.862-.345-1.81.048-.962.058-1.307-.058-3.71s-.01-2.748-.058-3.71c-.045-.948-.2-1.503-.345-1.81a3.29 3.29 0 00-.664-.894 3.29 3.29 0 00-.895-.664c-.307-.145-.862-.299-1.81-.345-.962-.048-1.307-.058-3.71-.058zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.648a3.513 3.513 0 110-7.026 3.513 3.513 0 010 7.026zM17.636 7.11a1.22 1.22 0 100-2.44 1.22 1.22 0 000 2.44z" clip-rule="evenodd" /></svg>
+                        <a id="instagram-link" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-[#6C2BD9] transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.343 4.65c.636-.247 1.363-.416 2.427-.465C9.792 2.013 10.146 2 12.315 2zm0 1.622c-2.403 0-2.748.01-3.71.058-.948.045-1.503.2-1.81.345-.38.18-.62.39-.894.664-.275.275-.485.515-.664.895-.145.307-.299.862-.345 1.81-.048.962-.058 1.307-.058 3.71s.01 2.748.058 3.71c.045.948.2 1.503.345 1.81.18.38.39.62.664.894.275.275.515.485.895.664.307.145.862.299 1.81.345.962.048 1.307.058 3.71.058s2.748-.01 3.71-.058c.948-.045 1.503-.2 1.81-.345.38-.18.62.39.894.664.275-.275.485.515.664-.895.145-.307.299-.862-.345-1.81.048-.962.058-1.307-.058-3.71s-.01-2.748-.058-3.71c-.045-.948-.2-1.503-.345-1.81a3.29 3.29 0 00-.664-.894 3.29 3.29 0 00-.895-.664c-.307-.145-.862-.299-1.81-.345-.962-.048-1.307-.058-3.71-.058zM12 6.865a5.135 5.135 0 100 10.27 5.135 5.135 0 000-10.27zm0 8.648a3.513 3.513 0 110-7.026 3.513 3.513 0 010 7.026zM17.636 7.11a1.22 1.22 0 100-2.44 1.22 1.22 0 000 2.44z" clip-rule="evenodd" /></svg>
                         </a>
-                        <a id="email-link" href="#" class="hover:text-purple-500 transition-colors">
+                        <a id="email-link" href="#" class="hover:text-[#6C2BD9] transition-colors">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
                         </a>
                     </div>
+                     <p class="text-sm mt-4">Made with ❤️ by <a href="https://xceedjs.com" target="_blank" rel="noopener noreferrer" class="font-semibold text-[#6C2BD9] hover:text-[#16A34A] transition-colors">XCEEDJS</a></p>
                 </div>
             </div>
         </footer>
 
     </div>
 
-    <!-- Modals (initially hidden) -->
-    <!-- Order Form Modal -->
     <div id="order-form-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8 w-full max-w-md transform transition-all duration-300 scale-95 opacity-0">
-             <h2 class="text-2xl font-bold mb-4 text-center text-gray-900 dark:text-white">Complete Your Order</h2>
-             <p class="text-center mb-1 text-gray-600 dark:text-gray-400">For: <span id="form-product-name" class="font-semibold"></span></p>
-             <p class="text-center mb-6 text-lg text-purple-600 dark:text-purple-400 font-bold">Amount: ₹<span id="form-product-price"></span></p>
+        <div class="modal-panel bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8 w-full max-w-md transform transition-all duration-300 scale-95 opacity-0">
+            <h2 class="text-2xl font-bold mb-4 text-center text-[#1F2937] dark:text-white">Complete Your Order</h2>
+            <p class="text-center mb-1 text-[#4B5563] dark:text-gray-400">For: <span id="form-product-name" class="font-semibold"></span></p>
+            <p class="text-center mb-6 text-lg text-[#6C2BD9] dark:text-[#8b5cf6] font-bold">Amount: ₹<span id="form-product-price"></span></p>
 
             <form id="customer-form" class="space-y-4">
-                <input type="text" id="name" placeholder="Full Name" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
-                <input type="tel" id="phone" placeholder="Phone Number" required class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
-                <textarea id="address" placeholder="Full Delivery Address" required rows="3" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
-                <input type="text" id="reel-link" placeholder="Link of Reel (if any)" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <input type="text" id="name" placeholder="Full Name" required class="w-full px-4 py-2 border border-[#E5E7EB] dark:border-gray-600 rounded-md bg-[#F9FAFB] dark:bg-gray-700 text-[#1F2937] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#6C2BD9]">
+                <input type="tel" id="phone" placeholder="Phone Number" required class="w-full px-4 py-2 border border-[#E5E7EB] dark:border-gray-600 rounded-md bg-[#F9FAFB] dark:bg-gray-700 text-[#1F2937] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#6C2BD9]">
+                <textarea id="address" placeholder="Full Delivery Address" required rows="3" class="w-full px-4 py-2 border border-[#E5E7EB] dark:border-gray-600 rounded-md bg-[#F9FAFB] dark:bg-gray-700 text-[#1F2937] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#6C2BD9]"></textarea>
+                <input type="text" id="reel-link" placeholder="Link of Reel (if any)" class="w-full px-4 py-2 border border-[#E5E7EB] dark:border-gray-600 rounded-md bg-[#F9FAFB] dark:bg-gray-700 text-[#1F2937] dark:text-white focus:outline-none focus:ring-2 focus:ring-[#6C2BD9]">
                 
                 <div class="flex flex-col sm:flex-row gap-4 pt-4">
-                    <button type="button" id="cancel-order" class="w-full bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-gray-200 font-bold py-3 px-4 rounded-md hover:bg-gray-300 dark:hover:bg-gray-500 transition-all">Cancel</button>
-                    <button type="submit" class="w-full bg-purple-600 text-white font-bold py-3 px-4 rounded-md hover:bg-purple-700 transition-all shadow-lg">Proceed to Pay</button>
+                    <button type="button" id="cancel-order" class="w-full bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-gray-200 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-all">Cancel</button>
+                    <button type="submit" class="w-full bg-[#6C2BD9] text-white font-bold py-3 px-4 rounded-lg hover:bg-[#5821b0] transition-all shadow-lg shadow-purple-500/30">Proceed to Pay</button>
                 </div>
             </form>
         </div>
     </div>
     
-    <!-- QR Code Modal -->
     <div id="qr-code-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8 w-full max-w-sm text-center transform transition-all duration-300 scale-95 opacity-0">
-            <h2 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Scan to Pay</h2>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Pay <strong class="text-purple-600 dark:text-purple-400">₹<span id="qr-amount"></span></strong> using any UPI app</p>
-            <div id="qrcode" class="flex justify-center items-center p-2 bg-white rounded-md my-4 min-h-[200px]">
-                <!-- QR code will be generated here -->
-            </div>
-            <p class="text-sm text-gray-500 dark:text-gray-400">UPI ID: <span id="upi-id-display"></span></p>
-            <button id="paid-button" class="mt-6 w-full bg-green-600 text-white font-bold py-3 px-4 rounded-md hover:bg-green-700 transition-all shadow-lg">I have Paid</button>
+        <div class="modal-panel bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8 w-full max-w-sm text-center transform transition-all duration-300 scale-95 opacity-0">
+            <h2 class="text-2xl font-bold mb-2 text-[#1F2937] dark:text-white">Scan to Pay</h2>
+            <p class="text-[#4B5563] dark:text-gray-400 mb-4">Pay <strong class="text-[#6C2BD9] dark:text-[#8b5cf6]">₹<span id="qr-amount"></span></strong> using any UPI app</p>
+            <div id="qrcode" class="flex justify-center items-center p-2 bg-white rounded-md my-4 min-h-[200px]"></div>
+            <p class="text-sm text-gray-500 dark:text-gray-400">UPI ID: <span id="upi-id-display" class="font-mono"></span></p>
+            <button id="paid-button" class="mt-6 w-full bg-[#16A34A] text-white font-bold py-3 px-4 rounded-lg hover:bg-[#15803d] transition-all shadow-lg shadow-green-500/30">I Have Paid</button>
         </div>
     </div>
 
-    <!-- Success Modal -->
     <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 hidden">
-         <div class="confetti-container"></div>
-        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md text-center transform transition-all duration-300 scale-95 opacity-0">
-             <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 dark:bg-green-900 mb-4">
+        <div class="confetti-container"></div>
+        <div class="modal-panel bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md text-center transform transition-all duration-300 scale-95 opacity-0">
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 dark:bg-green-900 mb-4">
                 <svg class="h-10 w-10 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
             </div>
-            <h2 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Payment Confirmed!</h2>
-            <p class="text-gray-600 dark:text-gray-400">Our team will contact you shortly. Thank you for your order!</p>
+            <h2 class="text-2xl font-bold mb-2 text-[#1F2937] dark:text-white">Payment Confirmed!</h2>
+            <p class="text-[#4B5563] dark:text-gray-400">Our team will contact you shortly. Thank you for your order!</p>
         </div>
     </div>
 
@@ -268,35 +253,26 @@
                 upiId: 'yshalsingh6@fam',
                 email: 'hampergiftindian@gmail.com',
                 instagramUrl: 'https://www.instagram.com/hampergift_indian/',
-                // logoPlaceholder: 'HGI', // Short text for the placeholder logo
-                
+                // NEW UNSPLASH HERO IMAGES (replaced for reliability)
                 heroImages: [
-                    'https://placehold.co/1200x400/a78bfa/ffffff?text=Exquisite+Gift+Hampers',
-                    'https://placehold.co/1200x400/7c3aed/ffffff?text=Gifts+for+Every+Occasion',
-                    'https://placehold.co/1200x400/c4b5fd/333333?text=Delivered+Across+India',
-                    'https://placehold.co/1200x400/8b5cf6/ffffff?text=Handcrafted+with+Love'
+                    'cr1.jpg',
+                    'cr2.jpg',
+                    'cr3.jpg',
+                    'cr4.jpg'
                 ],
-                
                 productData: [
-                    { name: 'Celebration Box', description: 'A perfect box for birthdays and anniversaries.', price: 1299 },
-                    { name: 'Luxury Hamper', description: 'Experience the finest selection of gourmet treats.', price: 2499 },
-                    { name: 'Chocolate Delight', description: 'For the ultimate chocolate lover in your life.', price: 899 },
-                    { name: 'Wellness Kit', description: 'A thoughtful gift of relaxation and self-care.', price: 1599 },
-                    { name: 'Festive Special', description: 'Brighten up any festival with this special hamper.', price: 1999 },
-                    { name: 'Corporate Gift Box', description: 'Impress your clients and colleagues.', price: 2999 },
-                    { name: 'Romantic Surprise', description: 'Everything you need for a romantic gesture.', price: 2199 },
-                    { name: 'New Baby Hamper', description: 'Welcome a newborn with this adorable collection.', price: 1799 },
+                    { name: 'Men\'s Executive Hamper', description: 'A sophisticated gift with a premium shirt, watch, wallet, and perfume.', price: 2300, image: 'photo1.png' },
+                    { name: 'Floral Vanity Trunk', description: 'A beautiful and reusable trunk adorned with fresh flowers and custom text.', price: 1500, image: 'photo2.png' },
+                    { name: 'Decadent Chocolate Bouquet', description: 'An irresistible bouquet of assorted premium chocolates for the sweet tooth.', price: 1000, image: 'photo3.png' },
+                    { name: 'Men\'s Classic Combo', description: 'The perfect combo featuring a stylish plaid shirt, belt, wallet, and more.', price: 2600, image: 'photo4.png' },
+                    { name: 'Elegant Maroon Hamper', description: 'A rich, color-themed hamper for him, complete with essentials and treats.', price: 2000, image: 'photo5.png' },
+                    { name: 'Sweet Memories Box', description: 'A charming pink gift box perfect for birthdays, filled with delightful surprises.', price: 1300, image: 'photo6.png' },
+                    { name: 'Anniversary Surprise Trunk', description: 'Celebrate your special day with this elegant black trunk, customized for you.', price: 2000, image: 'photo7.png' },
+                    { name: 'Pastel Dream Vanity', description: 'A lovely vanity case in a soothing pastel shade, perfect for any celebration.', price: 2000, image: 'photo8.png' }
                 ],
-
-                // For the feedback carousel. Use placeholder URLs or actual image paths.
                 feedbackImages: [
-                'feedback1.jpg' ,
-                'feedback2.jpg' ,
-                'feedback3.jpg' ,
-                'feedback4.jpg' ,
-                'feedback5.jpg' ,
-                'feedback6.jpg' ,
-
+                    'feedback1.jpg', 'feedback2.jpg', 'feedback3.jpg',
+                    'feedback4.jpg', 'feedback5.jpg', 'feedback6.jpg',
                 ]
             };
             // =================================================================================
@@ -309,74 +285,126 @@
                 document.getElementById('footer-brand-name').textContent = CONFIG.brandName;
                 document.getElementById('email-link').href = `mailto:${CONFIG.email}`;
                 document.getElementById('instagram-link').href = CONFIG.instagramUrl;
-                const logoImg = document.getElementById('brand-logo');
-                logoImg.src = `https://placehold.co/40x40/7c3aed/ffffff?text=${CONFIG.logoPlaceholder}`;
+
+                // logo: load logo.png directly; fallback to a placeholder if missing
+                const logoEl = document.getElementById('brand-logo');
+                logoEl.src = 'logo.png';
+                logoEl.alt = CONFIG.brandName + " logo";
+                logoEl.addEventListener('error', () => {
+                    logoEl.src = `https://placehold.co/40x40/6C2BD9/FFFFFF?text=${encodeURIComponent(CONFIG.brandName.split(' ')[0]||'H')}`;
+                });
             };
             initPageContent();
 
-
-            // --- THEME SWITCHER ---
-            const themeToggle = document.getElementById('theme-toggle');
+            // --- THEME SWITCHER (ROBUST) ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
             const themeIconLight = document.getElementById('theme-icon-light');
             const themeIconDark = document.getElementById('theme-icon-dark');
-            const html = document.documentElement;
+            const htmlEl = document.documentElement;
 
+            // apply theme visuals
             const applyTheme = (theme) => {
                 if (theme === 'dark') {
-                    html.classList.add('dark');
+                    htmlEl.classList.add('dark');
                     themeIconDark.classList.remove('hidden');
                     themeIconLight.classList.add('hidden');
                 } else {
-                    html.classList.remove('dark');
+                    htmlEl.classList.remove('dark');
                     themeIconDark.classList.add('hidden');
                     themeIconLight.classList.remove('hidden');
                 }
             };
-            
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            applyTheme(savedTheme);
 
-            themeToggle.addEventListener('click', () => {
-                const newTheme = html.classList.contains('dark') ? 'light' : 'dark';
+            // initial theme: prefer explicit stored preference, then system preference, then light
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            let currentTheme = 'light';
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) currentTheme = 'dark';
+            applyTheme(currentTheme);
+
+            themeToggleBtn.addEventListener('click', () => {
+                const isDark = htmlEl.classList.contains('dark');
+                const newTheme = isDark ? 'light' : 'dark';
                 localStorage.setItem('theme', newTheme);
                 applyTheme(newTheme);
             });
 
-            // --- HERO CAROUSEL ---
+            // --- HERO CAROUSEL (fixed, mobile-first, touch-friendly) ---
             const carouselContainer = document.getElementById('hero-carousel');
             const dotsContainer = document.getElementById('carousel-dots');
-            const carouselImages = CONFIG.heroImages;
+            const carouselImages = CONFIG.heroImages.slice(); // copy
             let currentSlide = 0;
             let slideInterval;
 
-            carouselImages.forEach((src, index) => {
-                const slide = document.createElement('div');
-                slide.className = 'carousel-item';
-                slide.style.backgroundImage = `url(${src})`;
-                if (index === 0) slide.classList.add('active');
-                carouselContainer.appendChild(slide);
+            function createSlides() {
+                carouselContainer.innerHTML = '';
+                dotsContainer.innerHTML = '';
 
-                const dot = document.createElement('button');
-                dot.className = 'carousel-dot';
-                if (index === 0) dot.classList.add('active');
-                dot.addEventListener('click', () => { showSlide(index); resetInterval(); });
-                dotsContainer.appendChild(dot);
-            });
-            
-            const slides = document.querySelectorAll('.carousel-item');
-            const dots = document.querySelectorAll('.carousel-dot');
+                carouselImages.forEach((src, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'carousel-item';
+                    slide.style.backgroundImage = `url(${src})`;
+                    // for accessibility add role
+                    slide.setAttribute('role', 'img');
+                    slide.setAttribute('aria-label', `Slide ${index + 1}`);
+                    if (index === 0) slide.classList.add('active');
+                    carouselContainer.appendChild(slide);
+
+                    const dot = document.createElement('button');
+                    dot.className = 'carousel-dot';
+                    dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                    if (index === 0) dot.classList.add('active');
+                    dot.addEventListener('click', () => { showSlide(index); resetInterval(); });
+                    dotsContainer.appendChild(dot);
+                });
+            }
 
             function showSlide(index) {
+                const slides = carouselContainer.querySelectorAll('.carousel-item');
+                const dots = dotsContainer.querySelectorAll('.carousel-dot');
+                index = ((index % slides.length) + slides.length) % slides.length;
                 slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
                 dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
                 currentSlide = index;
             }
 
-            function nextSlide() { showSlide((currentSlide + 1) % slides.length); }
-            function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 5000); }
-            slideInterval = setInterval(nextSlide, 5000);
+            function nextSlide() { const slides = carouselContainer.querySelectorAll('.carousel-item'); showSlide((currentSlide + 1) % slides.length); }
+            function prevSlide() { const slides = carouselContainer.querySelectorAll('.carousel-item'); showSlide((currentSlide - 1 + slides.length) % slides.length); }
 
-            // --- PRODUCT DATA & RENDERING ---
+            function startCarousel() {
+                stopCarousel();
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            function stopCarousel() {
+                if (slideInterval) { clearInterval(slideInterval); slideInterval = null; }
+            }
+            function resetInterval() { stopCarousel(); startCarousel(); }
+
+            // touch support for mobile (swipe left/right)
+            let touchStartX = null;
+            carouselContainer.addEventListener('touchstart', (e) => {
+                stopCarousel();
+                touchStartX = e.touches ? e.touches[0].clientX : null;
+            }, {passive:true});
+            carouselContainer.addEventListener('touchend', (e) => {
+                if (touchStartX == null) { startCarousel(); return; }
+                const touchEndX = e.changedTouches ? e.changedTouches[0].clientX : null;
+                if (touchEndX == null) { startCarousel(); return; }
+                const dx = touchEndX - touchStartX;
+                if (Math.abs(dx) > 40) {
+                    if (dx < 0) nextSlide(); else prevSlide();
+                }
+                touchStartX = null;
+                startCarousel();
+            }, {passive:true});
+
+            // init hero carousel
+            if (carouselImages.length > 0) {
+                createSlides();
+                startCarousel();
+            }
+
+            // --- PRODUCT RENDERING (unchanged behavior) ---
             const productGrid = document.getElementById('product-grid');
             const gridLoader = document.getElementById('grid-loader');
 
@@ -385,17 +413,20 @@
                 CONFIG.productData.forEach(product => {
                     const card = document.createElement('div');
                     card.className = 'bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 group';
+                    const placeholderImg = `https://placehold.co/400x300/c4b5fd/1F2937?text=${encodeURIComponent(product.name)}`;
+                    const finalImgSrc = product.image ? product.image : placeholderImg;
+
                     card.innerHTML = `
                         <div class="relative">
-                            <img class="w-full h-56 object-cover" src="https://placehold.co/400x300/e9d5ff/333333?text=${product.name.replace(/ /g,'+')}" alt="${product.name}" onerror="this.onerror=null;this.src='https://placehold.co/400x300/cccccc/ffffff?text=Image+Not+Found';">
-                            <div class="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-40 transition-all duration-300"></div>
+                            <img class="w-full h-56 object-cover" src="${finalImgSrc}" alt="${product.name}" onerror="this.onerror=null;this.src='${placeholderImg}';">
+                            <div class="absolute inset-0 bg-black bg-opacity-10 group-hover:bg-opacity-30 transition-all duration-300"></div>
                         </div>
                         <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">${product.name}</h3>
-                            <p class="mt-2 text-gray-600 dark:text-gray-400">${product.description}</p>
+                            <h3 class="text-xl font-bold">${product.name}</h3>
+                            <p class="mt-2 text-[#4B5563] dark:text-gray-400 h-12">${product.description}</p>
                             <div class="flex justify-between items-center mt-4">
-                                <span class="text-2xl font-bold text-purple-600 dark:text-purple-400">₹${product.price}</span>
-                                <button data-name="${product.name}" data-price="${product.price}" class="buy-now-btn bg-purple-600 text-white font-bold py-2 px-5 rounded-lg hover:bg-purple-700 transition-colors shadow-md">Buy Now</button>
+                                <span class="text-2xl font-bold text-[#6C2BD9] dark:text-[#8b5cf6]">₹${product.price}</span>
+                                <button data-name="${product.name}" data-price="${product.price}" class="buy-now-btn bg-[#6C2BD9] text-white font-bold py-2 px-5 rounded-lg hover:bg-[#5821b0] transition-colors shadow-md">Buy Now</button>
                             </div>
                         </div>`;
                     productGrid.appendChild(card);
@@ -408,7 +439,7 @@
                 attachBuyNowListeners();
             }, 1500);
 
-            // --- MODAL & FORM LOGIC ---
+            // --- MODAL & FORM LOGIC (unchanged behavior except small improvements) ---
             const globalLoader = document.getElementById('global-loader');
             const orderFormModal = document.getElementById('order-form-modal');
             const qrCodeModal = document.getElementById('qr-code-modal');
@@ -420,11 +451,13 @@
 
             const showModal = (modal) => {
                 modal.classList.remove('hidden');
-                setTimeout(() => modal.querySelector('div').classList.remove('scale-95', 'opacity-0'), 10);
+                const panel = modal.querySelector('.modal-panel') || modal.querySelector('div');
+                setTimeout(() => { panel.classList.remove('scale-95', 'opacity-0'); }, 10);
             };
 
             const hideModal = (modal) => {
-                modal.querySelector('div').classList.add('scale-95', 'opacity-0');
+                const panel = modal.querySelector('.modal-panel') || modal.querySelector('div');
+                panel.classList.add('scale-95', 'opacity-0');
                 setTimeout(() => modal.classList.add('hidden'), 300);
             };
 
@@ -453,14 +486,13 @@
                 e.preventDefault();
                 hideModal(orderFormModal);
                 showLoader();
-                // Form data submission logic remains the same
                 setTimeout(() => {
                     generateQRCode();
                     hideLoader();
                     showModal(qrCodeModal);
                 }, 1000);
             });
-            
+
             function generateQRCode() {
                 const amount = currentProduct.price;
                 const productName = currentProduct.name;
@@ -471,24 +503,22 @@
                 const qrContainer = document.getElementById('qrcode');
                 qrContainer.innerHTML = '';
                 try {
-                    const typeNumber = 0; 
-                    const errorCorrectionLevel = 'L';
-                    const qr = qrcode(typeNumber, errorCorrectionLevel);
+                    const qr = qrcode(0, 'L');
                     qr.addData(upiString);
                     qr.make();
                     qrContainer.innerHTML = qr.createImgTag(5, 4);
                 } catch (e) {
-                    qrContainer.innerHTML = "Error generating QR code. Please try again.";
+                    qrContainer.innerHTML = "Error generating QR code.";
                     console.error("QR Code Generation Error:", e);
                 }
             }
-            
+
             paidButton.addEventListener('click', () => {
                 hideModal(qrCodeModal);
                 showLoader();
                 setTimeout(() => { hideLoader(); showSuccess(); }, 1000);
             });
-            
+
             function showSuccess() {
                 showModal(successModal);
                 triggerConfetti();
@@ -498,7 +528,7 @@
             function triggerConfetti() {
                 const container = document.querySelector('.confetti-container');
                 container.innerHTML = '';
-                const colors = ['#7c3aed', '#a855f7', '#ec4899', '#fde047', '#4ade80'];
+                const colors = ['#6C2BD9', '#16A34A', '#ec4899', '#fde047', '#4ade80'];
                 for (let i = 0; i < 100; i++) {
                     const confetti = document.createElement('div');
                     confetti.classList.add('confetti');
@@ -510,61 +540,60 @@
                 }
             }
 
-            // --- ADVANCED TESTIMONIAL CAROUSEL (from user) ---
+            // --- FEEDBACK CAROUSEL (unchanged logic, fixed) ---
             const feedbackImages = CONFIG.feedbackImages;
             const feedbackImageEl = document.getElementById('feedback-image');
             let currentFeedbackIndex = 0;
             let intervalId = null;
             const CHANGE_MS = 4000;
 
-            feedbackImages.forEach(src => { new Image().src = src; }); // Preload images
+            if (feedbackImages.length > 0) {
+                feedbackImages.forEach(src => { new Image().src = src; }); // Preload
 
-            function normIndex(i) { return ((i % feedbackImages.length) + feedbackImages.length) % feedbackImages.length; }
+                function normIndex(i) { return ((i % feedbackImages.length) + feedbackImages.length) % feedbackImages.length; }
 
-            function showImage(index) {
-                index = normIndex(index);
-                feedbackImageEl.style.opacity = 0;
-                setTimeout(() => {
-                    feedbackImageEl.onload = () => {
-                        requestAnimationFrame(() => { feedbackImageEl.style.opacity = 1; });
-                        feedbackImageEl.onload = null;
-                    };
-                    feedbackImageEl.src = feedbackImages[index];
-                    currentFeedbackIndex = index;
-                }, 700);
+                function showImage(index) {
+                    index = normIndex(index);
+                    feedbackImageEl.style.opacity = 0;
+                    setTimeout(() => {
+                        feedbackImageEl.src = feedbackImages[index];
+                        currentFeedbackIndex = index;
+                    }, 350);
+                }
+                feedbackImageEl.addEventListener('load', () => {
+                    feedbackImageEl.style.opacity = 1;
+                });
+                feedbackImageEl.addEventListener('error', () => {
+                    feedbackImageEl.src = 'https://placehold.co/272x572/ffdddd/333333?text=Image+Missing';
+                    feedbackImageEl.style.opacity = 1;
+                });
+
+                function nextImage() { showImage(currentFeedbackIndex + 1); }
+                function prevImage() { showImage(currentFeedbackIndex - 1); }
+
+                function startAuto() {
+                    if (intervalId) return;
+                    intervalId = setInterval(nextImage, CHANGE_MS);
+                    document.getElementById('pause').textContent = 'Pause';
+                }
+                function stopAuto() {
+                    if (!intervalId) return;
+                    clearInterval(intervalId);
+                    intervalId = null;
+                    document.getElementById('pause').textContent = 'Resume';
+                }
+
+                document.getElementById('next').addEventListener('click', () => { stopAuto(); nextImage(); });
+                document.getElementById('prev').addEventListener('click', () => { stopAuto(); prevImage(); });
+                document.getElementById('pause').addEventListener('click', () => {
+                    if (intervalId) stopAuto(); else startAuto();
+                });
+
+                showImage(0); // Set initial image
+                startAuto(); // Start autoplay
             }
 
-            function nextImage() { showImage(currentFeedbackIndex + 1); }
-            function prevImage() { showImage(currentFeedbackIndex - 1); }
-
-            function startAuto() {
-                if (intervalId) return;
-                intervalId = setInterval(nextImage, CHANGE_MS);
-                document.getElementById('pause').textContent = 'Pause';
-            }
-            function stopAuto() {
-                if (!intervalId) return;
-                clearInterval(intervalId);
-                intervalId = null;
-                document.getElementById('pause').textContent = 'Resume';
-            }
-
-            document.getElementById('next').addEventListener('click', () => { stopAuto(); nextImage(); });
-            document.getElementById('prev').addEventListener('click', () => { stopAuto(); prevImage(); });
-            document.getElementById('pause').addEventListener('click', () => {
-                if (intervalId) stopAuto(); else startAuto();
-            });
-
-            feedbackImageEl.addEventListener('error', () => {
-                console.warn('Failed to load', feedbackImages[currentFeedbackIndex]);
-                feedbackImageEl.src = 'https://placehold.co/280x580/ffdddd/333333?text=Image+Missing';
-                feedbackImageEl.style.opacity = 1;
-            });
-
-            feedbackImageEl.src = feedbackImages[0]; // Set initial image
-            startAuto(); // Start autoplay
         });
     </script>
 </body>
 </html>
-
