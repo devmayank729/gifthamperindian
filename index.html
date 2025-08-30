@@ -44,7 +44,7 @@
       --glass: rgba(255,255,255,0.6);
 
       /* Theme fallback variables (used by .card-theme) */
-      --card-bg: #ffffff;
+      --card-bg: #FFFFFF;
       --card-text: #1F2937;
       --muted-text: #4B5563;
     }
@@ -145,7 +145,7 @@
         <div class="flex items-center justify-between h-16">
           <div class="flex items-center space-x-4">
             <img id="brand-logo" alt="Logo" class="h-10 w-10 rounded-full object-cover" src="logo.png">
-            <span id="brand-name" class="text-xl font-bold text-[#F357DD] dark:text-pink"></span>
+            <span id="brand-name" class="text-xl font-bold text-[#6C2BD9] dark:text-purple-400"></span>
           </div>
 
           <div class="flex items-center space-x-4">
@@ -178,24 +178,24 @@
       <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
     </main>
 
-    <footer class="bg-gray-100 dark:bg-gray-800 mt-16">
+    <footer class="bg-[#F9FAFB] dark:bg-gray-800 mt-16">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="mb-12">
           <h3 class="text-3xl font-bold text-center mb-8">What Our Clients Say</h3>
           <div class="flex justify-center">
-            <div class="relative mx-auto border-gray-800 dark:border-gray-700 bg-gray-800 border-[14px] rounded-[2.5rem] h-[650px] w-[300px] shadow-2xl">
-              <div class="w-[148px] h-[18px] bg-gray-800 dark:bg-gray-700 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
-              <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-700 absolute -start-[17px] top-[124px] rounded-s-lg"></div>
-              <div class="h-[46px] w-[3px] bg-gray-800 dark:bg-gray-700 absolute -start-[17px] top-[178px] rounded-s-lg"></div>
-              <div class="h-[64px] w-[3px] bg-gray-800 dark:bg-gray-700 absolute -end-[17px] top-[142px] rounded-e-lg"></div>
+            <div class="relative mx-auto border-[#E5E7EB] dark:border-gray-700 bg-white dark:bg-gray-800 border-[14px] rounded-[2.5rem] h-[650px] w-[300px] shadow-2xl">
+              <div class="w-[148px] h-[18px] bg-white dark:bg-gray-800 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
+              <div class="h-[46px] w-[3px] bg-white dark:bg-gray-800 absolute -start-[17px] top-[124px] rounded-s-lg"></div>
+              <div class="h-[46px] w-[3px] bg-white dark:bg-gray-800 absolute -start-[17px] top-[178px] rounded-s-lg"></div>
+              <div class="h-[64px] w-[3px] bg-white dark:bg-gray-800 absolute -end-[17px] top-[142px] rounded-e-lg"></div>
 
               <div class="rounded-[2rem] overflow-hidden w-full h-full bg-white dark:bg-gray-900 flex flex-col p-2">
                 <img id="feedback-image" class="w-full h-full object-cover rounded-2xl flex-grow" alt="Client Feedback" src="https://placehold.co/272x572/f3f4f6/333333?text=Loading...">
                 <div class="flex-shrink-0 pt-2 text-center">
                   <div class="flex justify-center items-center space-x-2">
-                    <button id="prev" class="px-3 py-1 text-sm font-semibold rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Prev</button>
-                    <button id="pause" class="px-4 py-1 text-sm font-semibold rounded-md bg-[#6C2BD9] text-white hover:bg-[#5821b0] transition-colors">Pause</button>
-                    <button id="next" class="px-3 py-1 text-sm font-semibold rounded-md bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Next</button>
+                    <button id="prev" class="px-3 py-1 text-sm font-semibold rounded-lg bg-gray-200 dark:bg-gray-700 text-[#1F2937] dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Prev</button>
+                    <button id="pause" class="px-4 py-1 text-sm font-semibold rounded-lg bg-[#6C2BD9] text-white hover:bg-[#5821b0] transition-colors">Pause</button>
+                    <button id="next" class="px-3 py-1 text-sm font-semibold rounded-lg bg-gray-200 dark:bg-gray-700 text-[#1F2937] dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">Next</button>
                   </div>
                 </div>
               </div>
@@ -222,7 +222,7 @@
   </div>
 
   <div id="order-form-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 hidden">
-    <div class="modal-panel bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8 w-full max-w-md transform transition-all duration-300 scale-95 opacity-0">
+    <div class="modal-panel bg-[#FFFFFF] dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8 w-full max-w-md transform transition-all duration-300 scale-95 opacity-0">
       <h2 class="text-2xl font-bold mb-4 text-center text-[#1F2937] dark:text-white">Complete Your Order</h2>
       <p class="text-center mb-1 text-[#4B5563] dark:text-gray-400">For: <span id="form-product-name" class="font-semibold"></span></p>
       <p class="text-center mb-6 text-lg text-[#6C2BD9] dark:text-[#8b5cf6] font-bold">Amount: ₹<span id="form-product-price"></span></p>
@@ -237,16 +237,28 @@
         <input type="hidden" id="form-ip-hidden" name="entry.1995640183">
 
         <div class="flex flex-col sm:flex-row gap-4 pt-4">
-          <button type="button" id="cancel-order" class="w-full bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-gray-200 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-all">Cancel</button>
+          <button type="button" id="cancel-order" class="w-full bg-[#E5E7EB] text-[#1F2937] dark:bg-gray-600 dark:text-gray-200 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-all">Cancel</button>
           <button type="submit" class="w-full bg-[#6C2BD9] text-white font-bold py-3 px-4 rounded-lg hover:bg-[#5821b0] transition-all shadow-lg shadow-purple-500/30">Proceed to Pay</button>
         </div>
       </form>
-      </div>
+    </div>
   </div>
 
+  <div id="payment-options-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 hidden">
+    <div class="modal-panel bg-[#FFFFFF] dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8 w-full max-w-sm text-center transform transition-all duration-300 scale-95 opacity-0">
+      <h2 class="text-2xl font-bold mb-4 text-[#1F2937] dark:text-white">Choose a Payment Method</h2>
+      <p class="text-[#4B5563] dark:text-gray-400 mb-6">Select your preferred UPI app to continue.</p>
+      <div class="flex flex-col sm:flex-row gap-4 pt-4">
+        <button type="button" id="phonepay-btn" class="w-full bg-[#E5E7EB] text-[#1F2937] dark:bg-gray-600 dark:text-gray-200 font-bold py-3 px-4 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-500 transition-all">PHONE-PAY</button>
+        <button type="button" id="paytm-btn" class="w-full bg-[#6C2BD9] text-white font-bold py-3 px-4 rounded-lg hover:bg-[#5821b0] transition-all shadow-lg shadow-purple-500/30">PAYTM</button>
+      </div>
+    </div>
+  </div>
+  
   <div id="qr-code-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 hidden">
-    <div class="modal-panel bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8 w-full max-w-sm text-center transform transition-all duration-300 scale-95 opacity-0">
+    <div class="modal-panel bg-[#FFFFFF] dark:bg-gray-800 rounded-lg shadow-xl p-6 md:p-8 w-full max-w-sm text-center transform transition-all duration-300 scale-95 opacity-0">
       <h2 class="text-2xl font-bold mb-2 text-[#1F2937] dark:text-white">Scan to Pay</h2>
+      <p id="qr-payment-method" class="text-[#4B5563] dark:text-gray-400 mb-2"></p>
       <p class="text-[#4B5563] dark:text-gray-400 mb-4">Pay <strong class="text-[#6C2BD9] dark:text-[#8b5cf6]">₹<span id="qr-amount"></span></strong> using any UPI app</p>
       <div id="qrcode" class="flex justify-center items-center p-2 bg-white rounded-md my-4 min-h-[200px]"></div>
       <p class="text-sm text-gray-500 dark:text-gray-400">UPI ID: <span id="upi-id-display" class="font-mono"></span></p>
@@ -256,9 +268,9 @@
 
   <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4 hidden">
     <div class="confetti-container"></div>
-    <div class="modal-panel bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md text-center transform transition-all duration-300 scale-95 opacity-0">
+    <div class="modal-panel bg-[#FFFFFF] dark:bg-gray-800 rounded-lg shadow-xl p-8 w-full max-w-md text-center transform transition-all duration-300 scale-95 opacity-0">
       <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 dark:bg-green-900 mb-4">
-        <svg class="h-10 w-10 text-green-600 dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg class="h-10 w-10 text-[#16A34A] dark:text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
         </svg>
       </div>
@@ -443,7 +455,14 @@
       const customerForm = document.getElementById('customer-form');
       const cancelOrderBtn = document.getElementById('cancel-order');
       const paidButton = document.getElementById('paid-button');
+      
+      // New payment option buttons
+      const paymentOptionsModal = document.getElementById('payment-options-modal');
+      const phonepayBtn = document.getElementById('phonepay-btn');
+      const paytmBtn = document.getElementById('paytm-btn');
+      
       let currentProduct = {};
+      let selectedPaymentMethod = '';
 
       const showModal = (modal) => {
         modal.classList.remove('hidden');
@@ -489,15 +508,14 @@
           // 1. Fetch IP Address
           let ipAddress = 'N/A';
           try {
-              const response = await fetch('https://api.ipify.org?format=json');
-              if (response.ok) {
-                  const data = await response.json();
-                  ipAddress = data.ip;
-              }
+            const response = await fetch('https://api.ipify.org?format=json');
+            if (response.ok) {
+              const data = await response.json();
+              ipAddress = data.ip;
+            }
           } catch (error) {
-              console.error("Could not fetch IP address:", error);
+            console.error("Could not fetch IP address:", error);
           }
-
           // 2. Populate hidden fields
           document.getElementById('form-amount-hidden').value = currentProduct.price;
           document.getElementById('form-ip-hidden').value = ipAddress;
@@ -505,21 +523,41 @@
           // 3. Submit the form to the hidden iframe
           customerForm.submit();
 
-          // 4. Continue with the payment UI flow after a short delay
+          // 4. Show the payment options modal instead of QR code modal
           setTimeout(() => {
-              generateQRCode();
-              hideLoader();
-              showModal(qrCodeModal);
+            hideLoader();
+            showModal(paymentOptionsModal);
           }, 800); // Delay to ensure form submission is fired
       }
       // =======================================================
+
+      // Handle payment option selection
+      phonepayBtn.addEventListener('click', () => {
+        selectedPaymentMethod = 'PhonePe';
+        hideModal(paymentOptionsModal);
+        generateQRCode();
+        showModal(qrCodeModal);
+      });
+
+      paytmBtn.addEventListener('click', () => {
+        selectedPaymentMethod = 'Paytm';
+        hideModal(paymentOptionsModal);
+        generateQRCode();
+        showModal(qrCodeModal);
+      });
       
       function generateQRCode() {
         const amount = currentProduct.price;
         const productName = currentProduct.name;
         const upiString = `upi://pay?pa=${CONFIG.upiId}&pn=${encodeURIComponent(CONFIG.brandName)}&am=${amount}&tn=Order%20for%20${encodeURIComponent(productName)}`;
+        
         document.getElementById('qr-amount').textContent = amount;
         document.getElementById('upi-id-display').textContent = CONFIG.upiId;
+        
+        // Update QR code modal with selected payment method
+        const paymentMethodEl = document.getElementById('qr-payment-method');
+        paymentMethodEl.textContent = `Please pay using ${selectedPaymentMethod} to avoid any payment failure`;
+
         const qrContainer = document.getElementById('qrcode');
         qrContainer.innerHTML = '';
         try {
@@ -559,7 +597,6 @@
           container.appendChild(conf);
         }
       }
-
       // FEEDBACK CAROUSEL
       const feedbackImages = CONFIG.feedbackImages;
       const feedbackImageEl = document.getElementById('feedback-image');
